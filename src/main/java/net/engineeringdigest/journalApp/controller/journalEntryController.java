@@ -25,7 +25,6 @@ public class journalEntryController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping
     public ResponseEntity<?> getAllJournalEntriesOfUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -71,15 +70,16 @@ public class journalEntryController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         boolean removed = journalEntryService.deleteById(myId, username);
-        if (removed) {
+        if(removed){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
+        }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
         }
 
     }
 
-    @PutMapping("/id/{id}")
+    @PutMapping("id/{id}")
     public ResponseEntity<?> updateJournalById(@PathVariable ObjectId id,
                                                @RequestBody JournalEntry newEntry) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -93,13 +93,11 @@ public class journalEntryController {
                 old.setTitle(newEntry.getTitle() != null && !newEntry.getTitle().equals("") ? newEntry.getTitle() : old.getTitle());
                 old.setContent(newEntry.getContent() != null && !newEntry.getContent().equals("") ? newEntry.getContent() : old.getContent());
                 journalEntryService.saveEntry(old);
-                return new ResponseEntity<>(old, HttpStatus.CREATED);
+                return new ResponseEntity<>(old, HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
-
 }
 
 

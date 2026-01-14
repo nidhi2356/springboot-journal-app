@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
+
 @Component
 public class JournalEntryService {
 
@@ -23,33 +23,33 @@ public class JournalEntryService {
     private UserService userService;
 
     @Transactional
-    public void saveEntry(JournalEntry journalEntry , String  userName){
-        try{
+    public void saveEntry(JournalEntry journalEntry, String userName) {
+        try {
             User user = userService.findingByUserName(userName);
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry saved = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(saved);
             userService.saveUser(user);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
-            throw new RuntimeException("An error occurred while saving the entry.",e );
+            throw new RuntimeException("An error occurred while saving the entry.", e);
         }
     }
 
-    public void saveEntry(JournalEntry journalEntry){
-        try{
+    public void saveEntry(JournalEntry journalEntry) {
+        try {
             journalEntry.setDate(LocalDateTime.now());
             journalEntryRepository.save(journalEntry);
-        }catch(Exception e){
-            log.error("Exception ", e);
+        } catch (Exception e) {
+            System.out.println("Exception " + e);
         }
     }
 
-    public List<JournalEntry> getAll(){
+    public List<JournalEntry> getAll() {
         return journalEntryRepository.findAll();
     }
 
-    public Optional<JournalEntry> findById(ObjectId id){
+    public Optional<JournalEntry> findById(ObjectId id) {
         return journalEntryRepository.findById(id);
     }
 
@@ -71,14 +71,4 @@ public class JournalEntryService {
         return removed;
 
     }
-
 }
-
-    /*
-    public List<JournalEntry> findByUserName(String userName){
-    return journalEntryRepository.findByUserName(userName);
-    }
-    */
-
-
-

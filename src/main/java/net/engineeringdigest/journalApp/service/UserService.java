@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -36,16 +37,18 @@ public class UserService {
             user.setRoles(Arrays.asList("USER"));
             userRepository.save(user);
             return true;
-        }catch (Exception e){
+        }catch(Exception e){
             logger.info("hahahahhaha");
             return false;
         }
+
     }
     public void saveAdmin(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER","ADMIN"));
         userRepository.save(user);
     }
+
 
     public List<User> getAll(){
         return userRepository.findAll();

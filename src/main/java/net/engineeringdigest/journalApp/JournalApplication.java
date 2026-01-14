@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
@@ -20,7 +21,6 @@ public class JournalApplication {
 		ConfigurableEnvironment environment = context.getEnvironment();
 		System.out.println(environment.getActiveProfiles()[0]);
 
-		//SpringApplication.run(JournalApplication.class, args);
 	}
 
 	@Bean
