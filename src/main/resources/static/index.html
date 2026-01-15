@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Journal App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Spring Boot Journal</p>
+          <h1>Capture your day in a secure journal.</h1>
+          <p class="lead">
+            Use basic auth to access your entries, create new journal notes, and
+            keep everything tidy in one place.
+          </p>
+          <p class="muted small">
+            Base URL: <span id="base-path">/</span>
+          </p>
+        </div>
+        <div class="hero-card">
+          <h2>Quick start</h2>
+          <ol>
+            <li>Create an account.</li>
+            <li>Save your credentials.</li>
+            <li>Write your first entry.</li>
+          </ol>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="panel">
+          <h2>Account</h2>
+          <p class="muted">
+            Create a new user, then enter the same credentials below to access
+            protected journal APIs.
+          </p>
+          <form id="signup-form" class="grid">
+            <label>
+              Username
+              <input name="signup-username" type="text" placeholder="jane" required />
+            </label>
+            <label>
+              Password
+              <input name="signup-password" type="password" placeholder="••••••" required />
+            </label>
+            <button type="submit">Create user</button>
+          </form>
+          <div id="signup-status" class="status"></div>
+
+          <div class="divider"></div>
+
+          <form id="auth-form" class="grid">
+            <label>
+              Username
+              <input name="auth-username" type="text" placeholder="jane" required />
+            </label>
+            <label>
+              Password
+              <input name="auth-password" type="password" placeholder="••••••" required />
+            </label>
+            <div class="button-row">
+              <button type="submit">Save credentials</button>
+              <button type="button" id="clear-auth">Clear</button>
+            </div>
+          </form>
+          <div class="chips">
+            <span class="chip">Active user: <strong id="active-user">none</strong></span>
+          </div>
+          <div id="auth-status" class="status"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Create entry</h2>
+          <form id="entry-form" class="stack">
+            <label>
+              Title
+              <input name="entry-title" type="text" placeholder="Morning reflections" required />
+            </label>
+            <label>
+              Content
+              <textarea
+                name="entry-content"
+                rows="4"
+                placeholder="Write your thoughts here..."
+                required
+              ></textarea>
+            </label>
+            <button type="submit">Add entry</button>
+          </form>
+          <div id="entry-status" class="status"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Profile</h2>
+          <p class="muted">
+            Update your username or password, or delete your account entirely.
+          </p>
+          <form id="profile-form" class="grid">
+            <label>
+              New username
+              <input name="profile-username" type="text" placeholder="jane.doe" />
+            </label>
+            <label>
+              New password
+              <input name="profile-password" type="password" placeholder="••••••" />
+            </label>
+            <button type="submit">Update profile</button>
+          </form>
+          <div class="button-row">
+            <button type="button" id="delete-account" class="ghost">
+              Delete account
+            </button>
+          </div>
+          <div id="profile-status" class="status"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>Your entries</h2>
+            <button id="refresh-entries" type="button" class="ghost">Refresh</button>
+          </div>
+          <div id="entries" class="entries">
+            <p class="muted">No entries loaded yet.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Admin tools</h2>
+          <p class="muted">
+            Requires an admin account. Create admin users and review all users.
+          </p>
+          <form id="admin-form" class="grid">
+            <label>
+              Admin username
+              <input name="admin-username" type="text" placeholder="admin" />
+            </label>
+            <label>
+              Admin password
+              <input name="admin-password" type="password" placeholder="••••••" />
+            </label>
+            <button type="submit">Create admin</button>
+          </form>
+          <div class="button-row">
+            <button type="button" id="load-users" class="ghost">Load all users</button>
+          </div>
+          <div id="admin-status" class="status"></div>
+          <div id="admin-users" class="entries muted">No admin data loaded yet.</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
